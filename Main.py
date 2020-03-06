@@ -15,7 +15,12 @@ def Get_Image(updater, context):
     print('i get img')
 Get_Image_Handler = MessageHandler(Filters.document.category('image'), Get_Image)
 
+def Get_Photo(updater, context):
+    print('i get photo')
+Get_Photo_Handler = MessageHandler(Filters.document.category('image'), Get_Photo)
+
 dispatcher.add_handler(Start_Handler)
 dispatcher.add_handler(Get_Image_Handler)
+dispatcher.add_handler(Get_Photo_Handler)
 
 updater.start_polling()
