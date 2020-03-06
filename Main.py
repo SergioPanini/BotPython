@@ -17,7 +17,7 @@ Get_Image_Handler = MessageHandler(Filters.document.category('image'), Get_Image
 
 def Get_Photo(updater, context):
     print('i get photo')
-Get_Photo_Handler = MessageHandler(Filters.document.category('image'), Get_Photo)
+Get_Photo_Handler = MessageHandler(Filters.photo, Get_Photo)
 
 dispatcher.add_handler(Start_Handler)
 dispatcher.add_handler(Get_Image_Handler)
