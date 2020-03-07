@@ -1,6 +1,7 @@
 from telegram.ext import Updater
 from telegram.ext import CommandHandler, MessageHandler
 from telegram.ext import Filters
+import os
 
 Token = '506889620:AAEu2LhOhwYf0jcLLPnX2v3t0p38679198o'
 
@@ -17,6 +18,9 @@ Get_Image_Handler = MessageHandler(Filters.document.category('image'), Get_Image
 
 def Get_Photo(updater, context):
     print('i get photo')
+    context.bot.get_file.download()
+    os.system('ls')
+
 Get_Photo_Handler = MessageHandler(Filters.photo, Get_Photo)
 
 dispatcher.add_handler(Start_Handler)
