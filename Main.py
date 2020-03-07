@@ -18,8 +18,7 @@ Get_Image_Handler = MessageHandler(Filters.document.category('image'), Get_Image
 
 def Get_Photo(bot, update):
     print('i get photo')
-    update.message.photo[-1].get_file().download(
-            custom_path="./")
+    print(update.message.photo[-1].get_file().size)
     print('work!!')
 
 Get_Photo_Handler = MessageHandler(Filters.photo, Get_Photo)
