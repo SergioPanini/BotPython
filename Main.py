@@ -38,7 +38,9 @@ def Get_Photo(update, context):
         img_base64 = base64.b64encode(image_file.read())
     r = requests.post(URL, data = img_base64)
     s = json.dumps(r.json(), indent=3)
-    print(json.loads(s).get("results")[0].get('plate'))
+    result_identification = json.loads(s).get("results")[0].get('plate')
+    print(result_identification)
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Your Number car:" + result_identification)
 
 
 
