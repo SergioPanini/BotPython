@@ -1,8 +1,10 @@
 from telegram.ext import Updater
 from telegram.ext import CommandHandler, MessageHandler
 from telegram.ext import Filters
-import os
-
+import logging
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+                     level=logging.INFO)
+                     
 Token = '506889620:AAEu2LhOhwYf0jcLLPnX2v3t0p38679198o'
 
 updater = Updater(token=Token, use_context=True)
@@ -18,9 +20,8 @@ Get_Image_Handler = MessageHandler(Filters.document.category('image'), Get_Image
 
 def Get_Photo(bot, update):
     print('i get photo')
-    print(update.message.photo)
+    #print(update.message.photo)
     print('work!!')
-
 Get_Photo_Handler = MessageHandler(Filters.photo, Get_Photo)
 
 dispatcher.add_handler(Start_Handler)
