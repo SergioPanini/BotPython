@@ -20,7 +20,7 @@ Get_Image_Handler = MessageHandler(Filters.document.category('image'), Get_Image
 
 def Get_Photo(update, context):
     print('i get photo')
-    print(context.message.photo)
+    print(update.message.photo)
     print('work!!')
 Get_Photo_Handler = MessageHandler(Filters.photo, Get_Photo)
 
