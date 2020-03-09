@@ -68,7 +68,7 @@ Write_card_Handler = CommandHandler('write_card', Write_card)
 
 def Mess(update, context):
     global Comand_up
-    context.bot.send_message(chat_id=update.effective_chat.id, text= Comand_up)
+    context.bot.send_message(chat_id=update.effective_chat.id, text= 'You write:' + Comand_up)
 Mess_Handler = MessageHandler(Filters.text, Mess)
 
 
