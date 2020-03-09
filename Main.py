@@ -37,19 +37,19 @@ Start_Handler = CommandHandler('start', Start)
 #init bot interfase
 def Write_name(updater, context):
     Comands_up = 'write_name'
-Write_name_Handler = CommandHandler('/write_name', Write_name)
+Write_name_Handler = CommandHandler('write_name', Write_name)
 
 def Write_surname(updater, context):
     Comands_up = 'write_surname'
-Write_surname_Handler = CommandHandler('/write_surname', Write_surname)
+Write_surname_Handler = CommandHandler('write_surname', Write_surname)
 
 def Write_phone_number(updater, context):
     Comands_up = 'write_phone'
-Write_phone_Handler = CommandHandler('/write_phone', Write_phone_number)
+Write_phone_Handler = CommandHandler('write_phone', Write_phone_number)
 
 def Write_card(updater, context):
     Comands_up = 'write_card'
-Write_card_Handler = CommandHandler('/write_card', Write_card)
+Write_card_Handler = CommandHandler('write_card', Write_card)
 
 def Mess(update, context):
     print(Comands_up)
