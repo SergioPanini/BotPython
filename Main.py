@@ -49,17 +49,20 @@ def Write_name(update, context):
 Write_name_Handler = CommandHandler('write_name', Write_name)
 
 def Write_surname(update, context):
-    #global Comand_up = 'surname'
+    global Comand_up 
+    Comand_up = 'surname'
     context.bot.send_message(chat_id=update.effective_chat.id, text='write surname please')
 Write_surname_Handler = CommandHandler('write_surname', Write_surname)
 
 def Write_phone_number(update, context):
-    #global Comands_up = 'phone'
+    global Comands_up 
+    Comand_up = 'phone'
     context.bot.send_message(chat_id=update.effective_chat.id, text='write phone  please')
 Write_phone_Handler = CommandHandler('write_phone', Write_phone_number)
 
 def Write_card(update, context):
-    #global Comands_up = 'card'
+    global Comands_up 
+    Comand_up = 'card'
     context.bot.send_message(chat_id=update.effective_chat.id, text='write card please')
 Write_card_Handler = CommandHandler('write_card', Write_card)
 
