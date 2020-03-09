@@ -43,8 +43,9 @@ Start_Handler = CommandHandler('start', Start)
 
 #init bot interfase
 def Write_name(update, context):
-    print(update.effective_chat.id)
-    #result = cour.execute('SELECT * FROM main_table WHERE TelegramID = ')
+    result = cour.execute("SELECT * FROM main_table WHERE TelegramID = '{0}'".format(update.effective_chat.id))
+    print(result)
+    prnt(type(result))
 Write_name_Handler = CommandHandler('write_name', Write_name)
 
 def Write_surname(update, context):
