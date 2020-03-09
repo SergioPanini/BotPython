@@ -21,7 +21,7 @@ URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=
 
 DB_URL = r'db.sqlite3'
 
-conn =sqlite3.connect(DB_URL)
+conn = sqlite3.connect(DB_URL)
 cour = conn.cursor()
 
 
@@ -43,9 +43,9 @@ Start_Handler = CommandHandler('start', Start)
 
 #init bot interfase
 def Write_name(update, context):
-    result = cour.execute("SELECT * FROM main_table WHERE TelegramID = '{0}'".format(update.effective_chat.id))
+    result = cour.execute("SELECT * FROM main_table WHERE TelegramID = '{0}'".format(update.effective_chat.id)).fetchall()
     print(result)
-    prnt(type(result))
+    print(type(result))
 Write_name_Handler = CommandHandler('write_name', Write_name)
 
 def Write_surname(update, context):
