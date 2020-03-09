@@ -8,6 +8,7 @@ import base64
 import json
 
 import os
+import sqlite3
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
@@ -17,6 +18,12 @@ Token = '506889620:AAEu2LhOhwYf0jcLLPnX2v3t0p38679198o'
 IMAGE_PATH = r'temp.jpeg'
 SECRET_KEY = r'sk_DEMODEMODEMODEMODEMODEMO'
 URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=ru&secret_key=%s' % (SECRET_KEY)
+
+DB_URL = r''
+
+conn =sqlite3.connect(DB_URL)
+cour = conn.cursor()
+
 
 updater = Updater(token=Token, use_context=True)
 dispatcher = updater.dispatcher
@@ -35,19 +42,20 @@ def Start(update, context):
 Start_Handler = CommandHandler('start', Start)
 
 #init bot interfase
-def Write_name(updater, context):
-    Comands_up = 'write_name'
+def Write_name(update, context):
+    print(update.effective_chat.id)
+    #result = cour.execute('SELECT * FROM main_table WHERE TelegramID = ')
 Write_name_Handler = CommandHandler('write_name', Write_name)
 
-def Write_surname(updater, context):
+def Write_surname(update, context):
     Comands_up = 'write_surname'
 Write_surname_Handler = CommandHandler('write_surname', Write_surname)
 
-def Write_phone_number(updater, context):
+def Write_phone_number(update, context):
     Comands_up = 'write_phone'
 Write_phone_Handler = CommandHandler('write_phone', Write_phone_number)
 
-def Write_card(updater, context):
+def Write_card(update, context):
     Comands_up = 'write_card'
 Write_card_Handler = CommandHandler('write_card', Write_card)
 
