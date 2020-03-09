@@ -31,7 +31,7 @@ list_commands = '''
 '''
 
 def Start(update, context):
-    contex.bot.send_message(chat_id=update.effective_chat.id, text="Hi, i am bot!" + list_commands)
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Hi, i am bot!" + list_commands)
 Start_Handler = CommandHandler('start', Start)
 
 #init bot interfase
