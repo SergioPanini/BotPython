@@ -19,7 +19,7 @@ IMAGE_PATH = r'temp.jpeg'
 SECRET_KEY = r'sk_DEMODEMODEMODEMODEMODEMO'
 URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=ru&secret_key=%s' % (SECRET_KEY)
 
-DB_URL = r''
+DB_URL = r'db.sqlite3'
 
 conn =sqlite3.connect(DB_URL)
 cour = conn.cursor()
