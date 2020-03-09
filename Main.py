@@ -21,14 +21,42 @@ URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=
 updater = Updater(token=Token, use_context=True)
 dispatcher = updater.dispatcher
 
+Comands_up = ''
+
+list_commands = '''
+/write_name
+/write_surname
+/write_card
+/write_phone
+'''
+
 def Start(update, context):
-    print('fffff')
+    contex.bot.send_message(chat_id=update.effective_chat.id, text="Hi, i am bot!" + list_commands)
 Start_Handler = CommandHandler('start', Start)
 
-def Get_Image(updater, context):
-    print('i get img')
-Get_Image_Handler = MessageHandler(Filters.document.category('image'), Get_Image)
+#init bot interfase
+def Write_name(updater, context):
+    Comands_up = 'write_name'
+Write_name_Handler = CommandHandler('/write_name', Write_name)
 
+def Write_surname(updater, context):
+    Comands_up = 'write_surname'
+Write_surname_Handler = CommandHandler('/write_surname', Write_surname)
+
+def Write_phone_number(updater, context):
+    Comands_up = 'write_phone'
+Write_phone_Handler = CommandHandler('/write_phone', Write_phone_number)
+
+def Write_card(updater, context):
+    Comands_up = 'write_card'
+Write_card_Handler = CommandHandler('/write_card', Write_card)
+
+def Mess(update, context):
+    print(Comands_up)
+Mess_Handlers = MessageHandler(Filters.text, Mess)
+
+
+#identification number from photo
 def Get_Photo(update, context):
     print('i get photo')
     update.message.photo[-1].get_file().download(custom_path = 'temp.jpeg')
@@ -43,11 +71,13 @@ def Get_Photo(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Your Number car:" + result_identification)
 
 
-
 Get_Photo_Handler = MessageHandler(Filters.photo, Get_Photo)
 
 dispatcher.add_handler(Start_Handler)
-dispatcher.add_handler(Get_Image_Handler)
 dispatcher.add_handler(Get_Photo_Handler)
-
+dispatcher.add_handler(Write_name_Handler)
+dispatcher.add_handler(Write_surname_Handler)
+dispatcher.add_handler(Write_phone_Handler)
+dispatcher.add_handler(Write_card_Handler)
+dispatcher.add_handler(Mess_Handler)
 updater.start_polling()
