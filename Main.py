@@ -28,7 +28,7 @@ cour = conn.cursor()
 updater = Updater(token=Token, use_context=True)
 dispatcher = updater.dispatcher
 
-Comands_up = ''
+Comand_up = ''
 
 list_commands = '''
 /write_name
@@ -43,25 +43,27 @@ Start_Handler = CommandHandler('start', Start)
 
 #init bot interfase
 def Write_name(update, context):
-    result = cour.execute("SELECT * FROM main_table WHERE TelegramID = '{0}'".format(update.effective_chat.id)).fetchall()
-    print(result)
-    print(type(result))
+    global Comand_up = 'name'
+    context.bot.send_message(chat_id=update.effective_chat.id, text='write name please')
 Write_name_Handler = CommandHandler('write_name', Write_name)
 
 def Write_surname(update, context):
-    Comands_up = 'write_surname'
+    global Comand_up = 'surname'
+    context.bot.send_message(chat_id=update.effective_chat.id, text='write surname please')
 Write_surname_Handler = CommandHandler('write_surname', Write_surname)
 
 def Write_phone_number(update, context):
-    Comands_up = 'write_phone'
+    global Comands_up = 'phone'
+    context.bot.send_message(chat_id=update.effective_chat.id, text='write phone  please')
 Write_phone_Handler = CommandHandler('write_phone', Write_phone_number)
 
 def Write_card(update, context):
-    Comands_up = 'write_card'
+    global Comands_up = 'card'
+    context.bot.send_message(chat_id=update.effective_chat.id, text='write card please')
 Write_card_Handler = CommandHandler('write_card', Write_card)
 
 def Mess(update, context):
-    print(Comands_up)
+    context.bot.send_message(chat_id=update.effective_chat.id, text= global Comand_up)
 Mess_Handler = MessageHandler(Filters.text, Mess)
 
 
