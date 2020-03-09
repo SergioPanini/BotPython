@@ -55,7 +55,7 @@ def Write_surname(update, context):
 Write_surname_Handler = CommandHandler('write_surname', Write_surname)
 
 def Write_phone_number(update, context):
-    global Comands_up 
+    global Comand_up 
     Comand_up = 'phone'
     context.bot.send_message(chat_id=update.effective_chat.id, text='write phone  please')
 Write_phone_Handler = CommandHandler('write_phone', Write_phone_number)
