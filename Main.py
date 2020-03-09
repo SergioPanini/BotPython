@@ -53,7 +53,7 @@ Write_card_Handler = CommandHandler('write_card', Write_card)
 
 def Mess(update, context):
     print(Comands_up)
-Mess_Handlers = MessageHandler(Filters.text, Mess)
+Mess_Handler = MessageHandler(Filters.text, Mess)
 
 
 #identification number from photo
