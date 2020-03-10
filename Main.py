@@ -35,6 +35,8 @@ list_commands = '''
 /write_surname
 /write_card
 /write_phone
+
+You can post me image and I sey number's car.
 '''
 
 def Start(update, context):
@@ -84,7 +86,7 @@ def Get_Photo(update, context):
     s = json.dumps(r.json(), indent=3)
     result_identification = json.loads(s).get("results")[0].get('plate')
     print(result_identification)
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Your Number car:" + result_identification)
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Your car's number is :" + result_identification)
 
 
 Get_Photo_Handler = MessageHandler(Filters.photo, Get_Photo)
