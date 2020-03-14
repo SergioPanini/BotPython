@@ -72,8 +72,11 @@ Write_card_Handler = CommandHandler('write_card', Write_card)
 def Mess(update, context):
     global Comand_up
     
-    if cour.execute("SELECT * FROM main_table WHERE id = {0}".format(update.effective_chat.id)).fetchall():
-        print('chat id found')
+    result = cour.execute("SELECT * FROM main_table")
+    print(result.fetchall())
+    
+    #if cour.execute("SELECT * FROM main_table WHERE id = {0}".format(update.effective_chat.id)).fetchall():
+    #    print('chat id found')
     else: print('chat id not found')
     context.bot.send_message(chat_id=update.effective_chat.id, text= 'You write:' + Comand_up)
 Mess_Handler = MessageHandler(Filters.text, Mess)
