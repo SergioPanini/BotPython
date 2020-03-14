@@ -1,10 +1,10 @@
 import sqlite3
 DB_URL = r'db.sqlite3'
 
-conn = sqlite3.connect(":memory:", check_same_thread = False)
+conn = sqlite3.connect(DB_URL)
 cour = conn.cursor()
 
-result = cour.execute("select * from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='tableName'")
+result = cour.execute("select * from main_table")
 print("print1: ", result.fetchall())
 
 
@@ -28,7 +28,7 @@ IMAGE_PATH = r'temp.jpeg'
 SECRET_KEY = r'sk_DEMODEMODEMODEMODEMODEMO'
 URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=ru&secret_key=%s' % (SECRET_KEY)
 
-result = cour.execute("select * from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='tableName'")
+result = cour.execute("select * from main_table")
 print("print2: ", result.fetchall())
 
 
