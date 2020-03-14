@@ -1,3 +1,13 @@
+import sqlite3
+DB_URL = r'db.sqlite3'
+
+conn = sqlite3.connect(":memory:", check_same_thread = False)
+cour = conn.cursor()
+
+result = cour.execute("select * from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='tableName'")
+print("print1: ", result.fetchall())
+
+
 from telegram.ext import Updater
 from telegram.ext import CommandHandler, MessageHandler
 from telegram.ext import Filters
@@ -8,7 +18,6 @@ import base64
 import json
 
 import os
-import sqlite3
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
@@ -19,10 +28,8 @@ IMAGE_PATH = r'temp.jpeg'
 SECRET_KEY = r'sk_DEMODEMODEMODEMODEMODEMO'
 URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=ru&secret_key=%s' % (SECRET_KEY)
 
-DB_URL = r'db.sqlite3'
-
-conn = sqlite3.connect(":memory:", check_same_thread = False)
-cour = conn.cursor()
+result = cour.execute("select * from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='tableName'")
+print("print2: ", result.fetchall())
 
 
 updater = Updater(token=Token, use_context=True)
