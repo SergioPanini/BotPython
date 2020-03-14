@@ -1,7 +1,7 @@
 import sqlite3
 DB_URL = r'BotDB.sqlite3'
 
-conn_new = sqlite3.connect(DB_URL)
+conn_new = sqlite3.connect(DB_URL )
 cour_new = conn_new.cursor()
 
 result = cour_new.execute("select * from main_table")
@@ -27,9 +27,6 @@ Token = '506889620:AAEu2LhOhwYf0jcLLPnX2v3t0p38679198o'
 IMAGE_PATH = r'temp.jpeg'
 SECRET_KEY = r'sk_DEMODEMODEMODEMODEMODEMO'
 URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=ru&secret_key=%s' % (SECRET_KEY)
-
-result = cour_new.execute("select * from main_table")
-print("print2: ", result.fetchall())
 
 
 updater = Updater(token=Token, use_context=True)
@@ -79,6 +76,9 @@ Write_card_Handler = CommandHandler('write_card', Write_card)
 def Mess(update, context):
     global Comand_up
     
+    conn_new = sqlite3.connect(DB_URL )
+    cour_new = conn_new.cursor()
+
     result = cour_new.execute("select * from main_table")
     print(result.fetchall())
     
