@@ -21,7 +21,7 @@ URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=
 
 DB_URL = r'db.sqlite3'
 
-conn = sqlite3.connect(DB_URL)
+conn = sqlite3.connect(":memory:", check_same_thread = False)
 cour = conn.cursor()
 
 
