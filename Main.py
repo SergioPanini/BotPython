@@ -21,7 +21,7 @@ URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=
 
 DB_URL = r'db.sqlite3'
 
-conn = sqlite3.connect(":memory:", check_same_thread = False)
+conn = sqlite3.connect(DB_URL)
 cour = conn.cursor()
 
 
@@ -48,6 +48,7 @@ def Write_name(update, context):
     global Comand_up 
     Comand_up = 'name'
     context.bot.send_message(chat_id=update.effective_chat.id, text='write name please')
+    print(update.effective_chat.id)
 Write_name_Handler = CommandHandler('write_name', Write_name)
 
 def Write_surname(update, context):
@@ -70,6 +71,8 @@ Write_card_Handler = CommandHandler('write_card', Write_card)
 
 def Mess(update, context):
     global Comand_up
+    
+    if cour.execute("SELECT id FROM main_table")
     context.bot.send_message(chat_id=update.effective_chat.id, text= 'You write:' + Comand_up)
 Mess_Handler = MessageHandler(Filters.text, Mess)
 
