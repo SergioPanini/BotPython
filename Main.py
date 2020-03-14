@@ -72,7 +72,7 @@ Write_card_Handler = CommandHandler('write_card', Write_card)
 def Mess(update, context):
     global Comand_up
     
-    result = cour.execute("SELECT * FROM main_table")
+    result = cour.execute("select * from INFORMATION_SCHEMA.COLUMNS where TABLE_NAME='tableName'")
     print(result.fetchall())
     
     #if cour.execute("SELECT * FROM main_table WHERE id = {0}".format(update.effective_chat.id)).fetchall():
