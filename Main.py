@@ -1,10 +1,10 @@
 import sqlite3
 DB_URL = r'db.sqlite3'
 
-conn = sqlite3.connect(DB_URL)
-cour = conn.cursor()
+conn_new = sqlite3.connect(DB_URL)
+cour_new = conn_new.cursor()
 
-result = cour.execute("select * from main_table")
+result = cour_new.execute("select * from main_table")
 print("print1: ", result.fetchall())
 
 
@@ -28,7 +28,7 @@ IMAGE_PATH = r'temp.jpeg'
 SECRET_KEY = r'sk_DEMODEMODEMODEMODEMODEMO'
 URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=ru&secret_key=%s' % (SECRET_KEY)
 
-result = cour.execute("select * from main_table")
+result = cour_new.execute("select * from main_table")
 print("print2: ", result.fetchall())
 
 
@@ -79,7 +79,7 @@ Write_card_Handler = CommandHandler('write_card', Write_card)
 def Mess(update, context):
     global Comand_up
     
-    result = cour.execute("select * from main_table")
+    result = cour_new.execute("select * from main_table")
     print(result.fetchall())
     
     #if cour.execute("SELECT * FROM main_table WHERE id = {0}".format(update.effective_chat.id)).fetchall():
