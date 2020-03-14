@@ -1,5 +1,5 @@
 import sqlite3
-DB_URL = r'db.sqlite3'
+DB_URL = r'BotDB.sqlite3'
 
 conn_new = sqlite3.connect(DB_URL)
 cour_new = conn_new.cursor()
