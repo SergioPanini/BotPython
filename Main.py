@@ -41,7 +41,8 @@ def Start(update, context):
 
     reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
     context.bot.send_message(chat_id=update.effective_chat.id, text=Start_text, reply_markup=reply_markup)
-    
+    SelectRegOrNo(update, context)
+
 Start_Handler = CommandHandler('start', Start)
 
 def SelectRegOrNo(update, context):
