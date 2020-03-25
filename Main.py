@@ -41,7 +41,7 @@ def MessageGet(update, context):
     Start(update, context)
     print('Start work!')
 
-MessageGet_Handler = MessageHandler(Filters.txt, MessageGet)
+MessageGet_Handler = MessageHandler(Filters.text, MessageGet)
 
 #init bot interfase
 def Write_name(update, context):
