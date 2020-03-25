@@ -36,10 +36,14 @@ You can post me image and I sey number's car.
 
 
 def Start(update, context):
-    custom_keyboard = [['top-left', 'top-right'], 
-                   ['bottom-left', 'bottom-right']]
+    custom_keyboard_start = [['Регистрация', 'Ввести код парковки']]
+    Start_text = '''
+    Здравствуйте! Я ваш персональный помощник в поиске и оплате парковок.
+    Для начала использования автоматизированных парковок вам требуется зарегистрировать
+    свой аккаунт или ввести код парковки.
+    '''
     reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Hi, i am bot!" + list_commands, reply_markup=reply_markup)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=Start_text, reply_markup=reply_markup)
 Start_Handler = CommandHandler('start', Start)
 
 #init bot interfase
