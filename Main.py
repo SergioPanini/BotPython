@@ -1,12 +1,3 @@
-import sqlite3
-DB_URL = r'BotDB.sqlite3'
-
-conn_new = sqlite3.connect(DB_URL )
-cour_new = conn_new.cursor()
-
-result = cour_new.execute("select * from main_table")
-print("print1: ", result.fetchall())
-
 
 from telegram.ext import Updater
 from telegram.ext import CommandHandler, MessageHandler
@@ -43,8 +34,12 @@ list_commands = '''
 You can post me image and I sey number's car.
 '''
 
+
 def Start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Hi, i am bot!" + list_commands)
+    custom_keyboard = [['top-left', 'top-right'], 
+                   ['bottom-left', 'bottom-right']]
+    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Hi, i am bot!" + list_commands, reply_markup=reply_markup)
 Start_Handler = CommandHandler('start', Start)
 
 #init bot interfase
@@ -73,20 +68,7 @@ def Write_card(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='write card please')
 Write_card_Handler = CommandHandler('write_card', Write_card)
 
-def Mess(update, context):
-    global Comand_up
-    
-    conn_new = sqlite3.connect(DB_URL )
-    cour_new = conn_new.cursor()
 
-    result = cour_new.execute("select * from main_table")
-    print(result.fetchall())
-    
-    #if cour.execute("SELECT * FROM main_table WHERE id = {0}".format(update.effective_chat.id)).fetchall():
-    #    print('chat id found')
-    #else: print('chat id not found')
-    context.bot.send_message(chat_id=update.effective_chat.id, text= 'You write:' + Comand_up)
-Mess_Handler = MessageHandler(Filters.text, Mess)
 
 
 #identification number from photo
@@ -112,5 +94,5 @@ dispatcher.add_handler(Write_name_Handler)
 dispatcher.add_handler(Write_surname_Handler)
 dispatcher.add_handler(Write_phone_Handler)
 dispatcher.add_handler(Write_card_Handler)
-dispatcher.add_handler(Mess_Handler)
+
 updater.start_polling()
