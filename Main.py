@@ -118,13 +118,14 @@ def Get_Photo(update, context):
 
 Get_Photo_Handler = MessageHandler(Filters.photo, Get_Photo)
 
-dispatcher.add_handler(MessageGet_Handler)
+
 dispatcher.add_handler(Start_Handler)
 dispatcher.add_handler(Get_Photo_Handler)
 dispatcher.add_handler(Write_name_Handler)
 dispatcher.add_handler(Write_surname_Handler)
 dispatcher.add_handler(Write_phone_Handler)
 dispatcher.add_handler(Write_card_Handler)
+dispatcher.add_handler(MessageGet_Handler)
 
 list_models = {
                 '/start': Start,
