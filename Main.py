@@ -23,17 +23,8 @@ URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=
 updater = Updater(token=Token, use_context=True)
 dispatcher = updater.dispatcher
 
-Comand_up = ''
-
-list_commands = '''
-/write_name
-/write_surname
-/write_card
-/write_phone
-
-You can post me image and I sey number's car.
-'''
-
+list_models = {'start', }
+users_steps = {}
 
 def Start(update, context):
     custom_keyboard_start = [['Регистрация', 'Ввести код парковки']]
@@ -46,30 +37,40 @@ def Start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text=Start_text, reply_markup=reply_markup)
 Start_Handler = CommandHandler('start', Start)
 
+def MessageGet(update, context):
+    Start(update, context)
+    print('Start work!')
+
+MessageGet_Handler = MessageHandler(Filters.txt, MessageGet)
+
 #init bot interfase
 def Write_name(update, context):
     global Comand_up 
     Comand_up = 'name'
     context.bot.send_message(chat_id=update.effective_chat.id, text='write name please')
     print(update.effective_chat.id)
+
 Write_name_Handler = CommandHandler('write_name', Write_name)
 
 def Write_surname(update, context):
     global Comand_up 
     Comand_up = 'surname'
     context.bot.send_message(chat_id=update.effective_chat.id, text='write surname please')
+
 Write_surname_Handler = CommandHandler('write_surname', Write_surname)
 
 def Write_phone_number(update, context):
     global Comand_up 
     Comand_up = 'phone'
     context.bot.send_message(chat_id=update.effective_chat.id, text='write phone  please')
+
 Write_phone_Handler = CommandHandler('write_phone', Write_phone_number)
 
 def Write_card(update, context):
     global Comands_up 
     Comand_up = 'card'
     context.bot.send_message(chat_id=update.effective_chat.id, text='write card please')
+
 Write_card_Handler = CommandHandler('write_card', Write_card)
 
 
@@ -89,9 +90,9 @@ def Get_Photo(update, context):
     print(result_identification)
     context.bot.send_message(chat_id=update.effective_chat.id, text="Your car's number is :" + result_identification)
 
-
 Get_Photo_Handler = MessageHandler(Filters.photo, Get_Photo)
 
+dispatcher.add_handler(MessageGet_Handler)
 dispatcher.add_handler(Start_Handler)
 dispatcher.add_handler(Get_Photo_Handler)
 dispatcher.add_handler(Write_name_Handler)
