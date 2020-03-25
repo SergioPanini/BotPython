@@ -127,7 +127,7 @@ dispatcher.add_handler(Write_phone_Handler)
 dispatcher.add_handler(Write_card_Handler)
 
 list_models = {
-                'Start': Start,
+                '/start': Start,
                 'GetNameUser': GetNameUser,
                 'SelectRegOrNo': SelectRegOrNo
              }
