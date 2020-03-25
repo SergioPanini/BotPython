@@ -23,10 +23,7 @@ URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=
 updater = Updater(token=Token, use_context=True)
 dispatcher = updater.dispatcher
 
-#list_models = {
-#                'Start': Start,
-#                'GetNameUser': GetNameUser,
-#             }
+
 users_data = {}
 
 def Start(update, context):
@@ -40,14 +37,14 @@ def Start(update, context):
 
     reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
     context.bot.send_message(chat_id=update.effective_chat.id, text=Start_text, reply_markup=reply_markup)
-    SelectRegOrNo(update, context)
+    users_data[update.effective_chat.id] = {'Next_step': 'GetNameUser'}
 
 Start_Handler = CommandHandler('start', Start)
 
 def SelectRegOrNo(update, context):
     if update.message.text == 'Регистрация':
 
-        users_data[update.effective_chat.id] = {'Next_step': 'GetNameUser'}
+        users_data[update.effective_chat.id]['Next_step'] = 'GetNameUser'
         context.bot.send_message(chat_id=update.effective_chat.id, text='введите имя плз')
 
     elif update.message.text == 'Ввести код парковки':
@@ -67,9 +64,9 @@ def GetNameUser(update, context):
 
 
 def MessageGet(update, context):
-    Start(update, context)
-    print('Start work!')
-
+    print('Get message!')
+    list_models[update.message.text](update, context)
+    
 MessageGet_Handler = MessageHandler(Filters.text, MessageGet)
 
 #init bot interfase
@@ -128,5 +125,11 @@ dispatcher.add_handler(Write_name_Handler)
 dispatcher.add_handler(Write_surname_Handler)
 dispatcher.add_handler(Write_phone_Handler)
 dispatcher.add_handler(Write_card_Handler)
+
+list_models = {
+                'Start': Start(update, context),
+                'GetNameUser': GetNameUser(update, context),
+                'SelectRegOrNo': SelectRegOrNo(update, context)
+             }
 
 updater.start_polling()
