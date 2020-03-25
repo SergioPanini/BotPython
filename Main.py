@@ -37,7 +37,7 @@ def Start(update, context):
 
     reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
     context.bot.send_message(chat_id=update.effective_chat.id, text=Start_text, reply_markup=reply_markup)
-    users_data[update.effective_chat.id] = {'Next_step': 'GetNameUser'}
+    users_data[update.effective_chat.id] = {'Next_step': 'SelectRegOrNo'}
 
 Start_Handler = CommandHandler('start', Start)
 
@@ -65,7 +65,7 @@ def GetNameUser(update, context):
 
 def MessageGet(update, context):
     print('Get message!')
-    list_models[update.message.text](update, context)
+    list_models[users_data[update.effective_chat.id]['Next_step']](update, context)
     
 MessageGet_Handler = MessageHandler(Filters.text, MessageGet)
 
