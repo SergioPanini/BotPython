@@ -127,9 +127,9 @@ dispatcher.add_handler(Write_phone_Handler)
 dispatcher.add_handler(Write_card_Handler)
 
 list_models = {
-                'Start': Start(update, context),
-                'GetNameUser': GetNameUser(update, context),
-                'SelectRegOrNo': SelectRegOrNo(update, context)
+                'Start': Start,
+                'GetNameUser': GetNameUser,
+                'SelectRegOrNo': SelectRegOrNo
              }
 
 updater.start_polling()
