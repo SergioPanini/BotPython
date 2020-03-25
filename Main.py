@@ -23,12 +23,11 @@ URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=
 updater = Updater(token=Token, use_context=True)
 dispatcher = updater.dispatcher
 
-list_models = {
-                'Start': Start,
-                'Registration': Registration,
-                'GetNameUser': GetNameUser,
-             }
-users_steps = {}
+#list_models = {
+#                'Start': Start,
+#                'GetNameUser': GetNameUser,
+#             }
+users_data = {}
 
 def Start(update, context):
 
@@ -48,7 +47,7 @@ Start_Handler = CommandHandler('start', Start)
 def SelectRegOrNo(update, context):
     if update.message.text == 'Регистрация':
 
-        users_steps[update.effective_chat.id] = {'Next_step': 'GetNameUser'}
+        users_data[update.effective_chat.id] = {'Next_step': 'GetNameUser'}
         context.bot.send_message(chat_id=update.effective_chat.id, text='введите имя плз')
 
     elif update.message.text == 'Ввести код парковки':
