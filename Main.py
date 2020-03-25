@@ -23,19 +23,48 @@ URL = r'https://api.openalpr.com/v2/recognize_bytes?recognize_vehicle=1&country=
 updater = Updater(token=Token, use_context=True)
 dispatcher = updater.dispatcher
 
-list_models = {'start', }
+list_models = {
+                'Start': Start,
+                'Registration': Registration,
+                'GetNameUser': GetNameUser,
+             }
 users_steps = {}
 
 def Start(update, context):
+
     custom_keyboard_start = [['Регистрация', 'Ввести код парковки']]
     Start_text = '''
     Здравствуйте! Я ваш персональный помощник в поиске и оплате парковок.
     Для начала использования автоматизированных парковок вам требуется зарегистрировать
     свой аккаунт или ввести код парковки.
     '''
+
     reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
     context.bot.send_message(chat_id=update.effective_chat.id, text=Start_text, reply_markup=reply_markup)
+    
 Start_Handler = CommandHandler('start', Start)
+
+def SelectRegOrNo(update, context):
+    if update.message.text == 'Регистрация':
+
+        users_steps[update.effective_chat.id] = {'Next_step': 'GetNameUser'}
+        context.bot.send_message(chat_id=update.effective_chat.id, text='введите имя плз')
+
+    elif update.message.text == 'Ввести код парковки':
+
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Эту ветку нужно еще допилить')
+
+    else: 
+        custom_keyboard_start = [['Регистрация', 'Ввести код парковки']]
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Выберити пожалуйста один из вариантов', reply_markup=reply_markup)
+  
+
+
+def GetNameUser(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text='ветка регистрации')
+
+
 
 def MessageGet(update, context):
     Start(update, context)
