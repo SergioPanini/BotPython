@@ -42,7 +42,7 @@ def Start(update, context):
     Для начала использования автоматизированных парковок вам требуется зарегистрировать
     свой аккаунт или ввести код парковки.
     '''
-    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
+    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
     context.bot.send_message(chat_id=update.effective_chat.id, text=Start_text, reply_markup=reply_markup)
 Start_Handler = CommandHandler('start', Start)
 
