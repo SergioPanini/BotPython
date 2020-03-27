@@ -79,7 +79,31 @@ def SelectRegOrNo(update, context):
 
 
 def GetNameUser(update, context):
+    users_data[update.effective_chat.id]['Name'] = update.message.text
+    user_data[update.effective_chat.id]['Nex_step'] = 'GetUsersCarsNumber'
     context.bot.send_message(chat_id=update.effective_chat.id, text='ветка регистрации')
+
+
+def GetUsersCarsNumber(update, context):
+    if update.message.text == '':
+        Result = GetNumberOnPhote(update)
+        if Result != False:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля: ' + Result)
+            user_data[update.effective_chat.id]['Nex_step'] = 'GetNameNumber'
+        else:
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля не распознан, отправьте фото еще раз или введите номер.)
+    
+    else:
+        users_data[update.effective_chat.id]['CarNumber'] = update.message.text
+        user_data[update.effective_chat.id]['Nex_step'] = 'GetNameNumber'
+        
+def GetNameNumber(update, context):
+    print(users_data)
+
+
+
+
+
 
 
 
@@ -87,41 +111,24 @@ def MessageGet(update, context):
     print('Get message!')
     list_models[users_data[update.effective_chat.id]['Next_step']](update, context)
 
+
+
+#Init Handlers
 Start_Handler = CommandHandler('start', Start)    
 MessageGet_Handler = MessageHandler(Filters.text, MessageGet)
-
-
-
-
-
-#identification number from photo
-def Get_Photo(update, context):
-    print(GetNumberOnPhote(update))
-
-    '''print('i get photo')
-    update.message.photo[-1].get_file().download(custom_path = 'temp.jpeg')
-    os.system('ls')
-    
-    with open(IMAGE_PATH, 'rb') as image_file:
-        img_base64 = base64.b64encode(image_file.read())
-    r = requests.post(URL, data = img_base64)
-    s = json.dumps(r.json(), indent=3)
-    result_identification = json.loads(s).get("results")[0].get('plate')
-    print(result_identification)
-    context.bot.send_message(chat_id=update.effective_chat.id, text="Your car's number is :" + result_identification)
-    '''
-Get_Photo_Handler = MessageHandler(Filters.photo, Get_Photo)
+GetUsersCarsNumber_Handler = MessageHandler(Filters.photo, GetUsersCarsNumber)
 
 
 dispatcher.add_handler(Start_Handler)
-dispatcher.add_handler(Get_Photo_Handler)
+dispatcher.add_handler(GetUsersCarsNumber_Handler)
 dispatcher.add_handler(MessageGet_Handler)
 
 
 list_models = {
                 '/start': Start,
                 'GetNameUser': GetNameUser,
-                'SelectRegOrNo': SelectRegOrNo
+                'SelectRegOrNo': SelectRegOrNo,
+                'GetUsersCarsNumber': GetUsersCarsNumber,
              }
 
 updater.start_polling()
