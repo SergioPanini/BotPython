@@ -132,7 +132,7 @@ def SelectMenu(update, context):
         '''
 
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_toeditdata)
-        context.bot.send_message(chat_id=update.effective_chat.id, text=text, replay_markup=replay_markup)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=text, replay_markup=reply_markup)
 
     else: 
         Menu(update, context)
