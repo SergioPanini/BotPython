@@ -75,7 +75,7 @@ def SelectRegOrNo(update, context):
         custom_keyboard_start = [['Регистрация', 'Ввести код парковки']]
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
         context.bot.send_message(chat_id=update.effective_chat.id, text='Выберити пожалуйста один из вариантов', reply_markup=reply_markup)
-  
+
 
 
 def GetNameUser(update, context):
@@ -98,16 +98,49 @@ def GetUsersCarsNumber(update, context):
     else:
         users_data[update.effective_chat.id]['CarNumber'] = update.message.text
         users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumber'
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Как назовете этот автомобиль?')
+    
         
 def GetNameNumber(update, context):
-    print(users_data)
+    users_data[update.effective_chat.id]['Name'] = update.message.text
+    users_data[update.effective_chat.id]['Next_step'] = 'Menu'
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Отлично, все данные введены.')
+
+def Menu(update, context):
+    custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
+    menu_text = '''
+    Вам доступны следующий функции: Текущий статус парковки,
+    Оставить обращение в поддержку, Вопросы и ответы, Изменить данные.
+    '''
+
+    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_menu)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=menu_text, reply_markup=reply_markup)
+    users_data[update.effective_chat.id]['Next_step'] = 'SelectMenu'
 
 
+def SelectMenu(update, context):
+    if update.message.text == 'Текущий статус парковки':
 
+        users_data[update.effective_chat.id]['Next_step'] = 'GetNameUser'
+        context.bot.send_message(chat_id=update.effective_chat.id, text='введите имя плз')
 
+    elif update.message.text == 'Оставить обращение в поддержку':
 
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Эту ветку нужно еще допилить')
 
+    elif update.message.text == 'Вопросы и ответы':
 
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Эту ветку нужно еще допилить')
+
+    elif update.message.text == 'Изменить данные':
+
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Эту ветку нужно еще допилить')
+
+    else: 
+        custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_menu)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Выберити пожалуйста один из вариантов', reply_markup=reply_markup)
+  
 
 def MessageGet(update, context):
     print('Get message! Chat:' + str(update.effective_chat.id))
@@ -132,6 +165,8 @@ list_models = {
                 'SelectRegOrNo': SelectRegOrNo,
                 'GetUsersCarsNumber': GetUsersCarsNumber,
                 'GetNameNumber': GetNameNumber,
+                'Menu': Menu,
+                'SelectMenu': SelectMenu,
              }
 print('________________Bot started__________________')
 
