@@ -85,6 +85,7 @@ def GetNameUser(update, context):
 
 
 def GetUsersCarsNumber(update, context):
+    print('GetUsersCarsNumber is calling')
     if update.message.text == '':
         Result = GetNumberOnPhote(update)
         if Result != False:
