@@ -91,7 +91,7 @@ def GetUsersCarsNumber(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля: ' + Result)
             user_data[update.effective_chat.id]['Nex_step'] = 'GetNameNumber'
         else:
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля не распознан, отправьте фото еще раз или введите номер.)
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля не распознан, отправьте фото еще раз или введите номер.')
     
     else:
         users_data[update.effective_chat.id]['CarNumber'] = update.message.text
