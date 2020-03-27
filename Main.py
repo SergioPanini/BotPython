@@ -22,6 +22,8 @@ dispatcher = updater.dispatcher
 
 #This dict save user data: steps, name and other
 users_data = {}
+#Messege if button no select
+NOT_SELECT_BUTTON = 'Выберете один из пунктов'
 
  #This functiions get photo and output car's number or false 
 def GetNumberOnPhote(update):
@@ -118,9 +120,7 @@ def GetNameNumberAndPushMenu(update, context):
 
 def SelectMenu(update, context):
     if update.message.text == 'Текущий статус парковки':
-
-        users_data[update.effective_chat.id]['Next_step'] = 'GetNameUser'
-        context.bot.send_message(chat_id=update.effective_chat.id, text='введите имя плз')
+        GetSatus(update, context)
 
     elif update.message.text == 'Оставить обращение в поддержку':
 
@@ -137,8 +137,45 @@ def SelectMenu(update, context):
     else: 
         custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_menu)
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Выберити пожалуйста один из вариантов', reply_markup=reply_markup)
-  
+        context.bot.send_message(chat_id=update.effective_chat.id, text=NOT_SELECT_BUTTON, reply_markup=reply_markup)
+
+def ToMenu(update, context):
+    if update.message.text == 'Обновить статус':
+        GetSatus(update, context)
+
+    elif update.message.text == 'Вернутся в меню':
+        custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
+        menu_text = '''
+        Вам доступны следующий функции: Текущий статус парковки,
+        Оставить обращение в поддержку, Вопросы и ответы, Изменить данные.
+        '''
+
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_menu)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=menu_text, reply_markup=reply_markup)
+        users_data[update.effective_chat.id]['Next_step'] = 'SelectMenu'
+    
+    else:
+        custom_keyboard_tomenu = [['Обновить статус', 'Вернутся в меню']]
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=NOT_SELECT_BUTTON, reply_markup=reply_markup)
+    
+
+#This function get status parks use API
+def GetSatus(update, context):
+    custom_keyboard_tomenu = [['Обновить статус', 'Вернутся в меню']]
+    status_text = '''
+    Ваш автомобиль $Ник автомобиля:
+    Номер автомобиля: $car number
+    Статус: не на парковке Parks&Me / на парковке Parks&Me
+    Прошло времени: $time
+    Итого к оплате:
+    '''
+
+    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=status_text, reply_markup=reply_markup)
+    
+
+
 
 def MessageGet(update, context):
     print('Get message! Chat:' + str(update.effective_chat.id))
