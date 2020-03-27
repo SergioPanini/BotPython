@@ -131,7 +131,7 @@ def SelectMenu(update, context):
         -Номер вашего автомобиля: @carnumber
         '''
 
-        replay_markup = telegram.Replykeyboardmarkup(custom_keyboard_toeditdata)
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_toeditdata)
         context.bot.send_message(chat_id=update.effective_chat.id, text=text, replay_markup=replay_markup)
 
     else: 
