@@ -87,7 +87,7 @@ def GetNameUser(update, context):
 def GetUsersCarsNumber(update, context):
     print('GetUsersCarsNumber is calling')
     print(str(update.message.text))
-    if update.message.text == '':
+    if update.message.text == None:
         Result = GetNumberOnPhote(update)
         if Result != False:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля: ' + Result)
@@ -97,7 +97,7 @@ def GetUsersCarsNumber(update, context):
     
     else:
         users_data[update.effective_chat.id]['CarNumber'] = update.message.text
-        users_data[update.effective_chat.id]['Nex_step'] = 'GetNameNumber'
+        users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumber'
         
 def GetNameNumber(update, context):
     print(users_data)
