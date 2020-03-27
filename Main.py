@@ -90,7 +90,7 @@ def GetUsersCarsNumber(update, context):
     if update.message.text == None:
         Result = GetNumberOnPhote(update)
         if Result != False:
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля: ' + Result)
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля: ' + Result + 'Как назовете этот автомобиль?')
             users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumberAndPushMenu'
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля не распознан, отправьте фото еще раз или введите номер.')
