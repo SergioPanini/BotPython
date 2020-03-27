@@ -135,7 +135,7 @@ def SelectMenu(update, context):
     else: 
         Menu(update, context)
 
-def Menu(updat, context):
+def Menu(update, context):
     custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
     menu_text = '''
     Вам доступны следующий функции: Текущий статус парковки,
