@@ -130,7 +130,7 @@ def SelectMenu(update, context):
         -Ваш номер телефона: @phone
         -Номер вашего автомобиля: @carnumber
         '''
-        context.bot.send_message(chat_id=update.effective_chat.id, text=text)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=custom_keyboard_toeditdata)
 
     else: 
         Menu(update, context)
