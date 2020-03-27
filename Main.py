@@ -97,7 +97,7 @@ MessageGet_Handler = MessageHandler(Filters.text, MessageGet)
 #identification number from photo
 def Get_Photo(update, context):
     print(GetNumberOnPhote(update))
-    
+
     '''print('i get photo')
     update.message.photo[-1].get_file().download(custom_path = 'temp.jpeg')
     os.system('ls')
@@ -115,10 +115,6 @@ Get_Photo_Handler = MessageHandler(Filters.photo, Get_Photo)
 
 dispatcher.add_handler(Start_Handler)
 dispatcher.add_handler(Get_Photo_Handler)
-dispatcher.add_handler(Write_name_Handler)
-dispatcher.add_handler(Write_surname_Handler)
-dispatcher.add_handler(Write_phone_Handler)
-dispatcher.add_handler(Write_card_Handler)
 dispatcher.add_handler(MessageGet_Handler)
 
 
