@@ -107,15 +107,7 @@ def GetNameNumberAndPushMenu(update, context):
     users_data[update.effective_chat.id]['Name'] = update.message.text
     context.bot.send_message(chat_id=update.effective_chat.id, text='Отлично, все данные введены.')
 
-    custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
-    menu_text = '''
-    Вам доступны следующий функции: Текущий статус парковки,
-    Оставить обращение в поддержку, Вопросы и ответы, Изменить данные.
-    '''
-
-    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_menu)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=menu_text, reply_markup=reply_markup)
-    users_data[update.effective_chat.id]['Next_step'] = 'SelectMenu'
+    Menu(update, context)
 
 
 def SelectMenu(update, context):
@@ -141,25 +133,27 @@ def SelectMenu(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=text)
 
     else: 
-        custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
-        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_menu)
-        context.bot.send_message(chat_id=update.effective_chat.id, text=NOT_SELECT_BUTTON, reply_markup=reply_markup)
+        Menu(update, context)
+
+def Menu(updat, context):
+    custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
+    menu_text = '''
+    Вам доступны следующий функции: Текущий статус парковки,
+    Оставить обращение в поддержку, Вопросы и ответы, Изменить данные.
+    '''
+
+    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_menu)
+    context.bot.send_message(chat_id=update.effective_chat.id, text=menu_text, reply_markup=reply_markup)
+    users_data[update.effective_chat.id]['Next_step'] = 'SelectMenu'
+    
 
 def ToMenu(update, context):
     if update.message.text == 'Обновить статус':
         GetSatus(update, context)
 
     elif update.message.text == 'Вернутся в меню':
-        custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
-        menu_text = '''
-        Вам доступны следующий функции: Текущий статус парковки,
-        Оставить обращение в поддержку, Вопросы и ответы, Изменить данные.
-        '''
+        Menu(update, context)
 
-        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_menu)
-        context.bot.send_message(chat_id=update.effective_chat.id, text=menu_text, reply_markup=reply_markup)
-        users_data[update.effective_chat.id]['Next_step'] = 'SelectMenu'
-    
     else:
         custom_keyboard_tomenu = [['Обновить статус', 'Вернутся в меню']]
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
@@ -183,29 +177,36 @@ def GetSatus(update, context):
 
 def SelectEditData(update, context):
     if update.message.text == 'изменить имя':
-        GetSatus(update, context)
+        EditName(update, context)
 
     elif update.message.text == 'изменить телефон':
-        pass
+        EditPhone(update, context)
+        
     elif update.message.text == 'изменить номер':
-        pass
-    elif update.message.text == 'изменить ник': 
-        pass
-    elif update.message.text == 'вернутся в меню':
+        EditCarNumber(update, context)
 
+    elif update.message.text == 'изменить ник': 
+        EditCarName(update, context)
+
+    elif update.message.text == 'вернутся в меню':
+        Menu(update, context)
+                
     else:
-        custom_keyboard_tomenu = [['Обновить статус', 'Вернутся в меню']]
+        custom_keyboard_toeditdata = [['изменить имя', 'изменить телефон'], ['изменить номер', 'изменить ник'], ['вернутся в меню']]
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
         context.bot.send_message(chat_id=update.effective_chat.id, text=NOT_SELECT_BUTTON, reply_markup=reply_markup)
     
 def EditName(update, context):
-    pass
+    print('edname')
 
 def EditPhone(update, context):
-    pass
+    print('edph')
 
 def EditCarNumber(update, context):
-    pass
+    print('edcarnum')
+
+def EditCarName(update, context):
+    print('edacarname')
 
 
 
@@ -235,6 +236,10 @@ list_models = {
                 'SelectMenu': SelectMenu,
                 'GetSatus': GetSatus,
                 'ToMenu': ToMenu,
+                'EditName': EditName,
+                'EditPhone': EditPhone,
+                'EditCarNumber': EditCarNumber,
+                'EditCarName': EditCarName,
              }
 print('________________Bot started__________________')
 
