@@ -131,6 +131,7 @@ list_models = {
                 'GetNameUser': GetNameUser,
                 'SelectRegOrNo': SelectRegOrNo,
                 'GetUsersCarsNumber': GetUsersCarsNumber,
+                'GetNameNumber': GetNameNumber,
              }
 print('________________Bot started__________________')
 
