@@ -91,22 +91,20 @@ def GetUsersCarsNumber(update, context):
         Result = GetNumberOnPhote(update)
         if Result != False:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля: ' + Result)
-            users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumber'
+            users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumberAndPushMenu'
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля не распознан, отправьте фото еще раз или введите номер.')
     
     else:
         users_data[update.effective_chat.id]['CarNumber'] = update.message.text
-        users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumber'
+        users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumberAndPushMenu'
         context.bot.send_message(chat_id=update.effective_chat.id, text='Как назовете этот автомобиль?')
     
         
-def GetNameNumber(update, context):
+def GetNameNumberAndPushMenu(update, context):
     users_data[update.effective_chat.id]['Name'] = update.message.text
-    users_data[update.effective_chat.id]['Next_step'] = 'Menu'
     context.bot.send_message(chat_id=update.effective_chat.id, text='Отлично, все данные введены.')
 
-def Menu(update, context):
     custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
     menu_text = '''
     Вам доступны следующий функции: Текущий статус парковки,
@@ -164,8 +162,7 @@ list_models = {
                 'GetNameUser': GetNameUser,
                 'SelectRegOrNo': SelectRegOrNo,
                 'GetUsersCarsNumber': GetUsersCarsNumber,
-                'GetNameNumber': GetNameNumber,
-                'Menu': Menu,
+                'GetNameNumberAndPushMenu': GetNameNumberAndPushMenu,
                 'SelectMenu': SelectMenu,
              }
 print('________________Bot started__________________')
