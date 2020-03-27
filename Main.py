@@ -123,7 +123,7 @@ def SelectMenu(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text='Эту ветку нужно еще допилить')
 
     elif update.message.text == 'Изменить данные':
-        custom_keyboard_toeditdata = [['изменить имя', 'изменить телефон'], ['изменить номер', 'изменить ник'], ['вернутся в меню']]
+        custom_keyboard_toeditdata = [['изменить имя', 'изменить телефон'], ['изменить номер', 'изменить ник'], ['вернутся в меню','']]
         text = '''
         Вы можете изменить следующие данные:
         -Ваше имя: @name
@@ -132,7 +132,7 @@ def SelectMenu(update, context):
         '''
 
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_toeditdata)
-        context.bot.send_message(chat_id=update.effective_chat.id, text=text, replay_markup=reply_markup)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=text, reply_markup=reply_markup)
 
     else: 
         Menu(update, context)
