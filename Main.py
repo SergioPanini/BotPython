@@ -81,7 +81,7 @@ def SelectRegOrNo(update, context):
 def GetNameUser(update, context):
     users_data[update.effective_chat.id]['Name'] = update.message.text
     users_data[update.effective_chat.id]['Nex_step'] = 'GetUsersCarsNumber'
-    context.bot.send_message(chat_id=update.effective_chat.id, text='ветка регистрации')
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Введите пожалуйста номер вашегоавто в формате: O529TH197 или отправьте фото вашего номера.')
 
 
 def GetUsersCarsNumber(update, context):
@@ -130,5 +130,7 @@ list_models = {
                 'SelectRegOrNo': SelectRegOrNo,
                 'GetUsersCarsNumber': GetUsersCarsNumber,
              }
+print('________________Bot started__________________')
+
 
 updater.start_polling()
