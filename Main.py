@@ -131,8 +131,14 @@ def SelectMenu(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text='Эту ветку нужно еще допилить')
 
     elif update.message.text == 'Изменить данные':
-
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Эту ветку нужно еще допилить')
+        custom_keyboard_toeditdata = [['изменить имя', 'изменить телефон'], ['изменить номер', 'изменить ник'], ['вернутся в меню']]
+        text = '''
+        Вы можете изменить следующие данные:
+        -Ваше имя: @name
+        -Ваш номер телефона: @phone
+        -Номер вашего автомобиля: @carnumber
+        '''
+        context.bot.send_message(chat_id=update.effective_chat.id, text=text)
 
     else: 
         custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
@@ -175,6 +181,31 @@ def GetSatus(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text=status_text, reply_markup=reply_markup)
     users_data[update.effective_chat.id]['Next_step'] = 'ToMenu'
 
+def SelectEditData(update, context):
+    if update.message.text == 'изменить имя':
+        GetSatus(update, context)
+
+    elif update.message.text == 'изменить телефон':
+        pass
+    elif update.message.text == 'изменить номер':
+        pass
+    elif update.message.text == 'изменить ник': 
+        pass
+    elif update.message.text == 'вернутся в меню':
+
+    else:
+        custom_keyboard_tomenu = [['Обновить статус', 'Вернутся в меню']]
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=NOT_SELECT_BUTTON, reply_markup=reply_markup)
+    
+def EditName(update, context):
+    pass
+
+def EditPhone(update, context):
+    pass
+
+def EditCarNumber(update, context):
+    pass
 
 
 
