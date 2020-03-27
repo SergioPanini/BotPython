@@ -173,7 +173,8 @@ def GetSatus(update, context):
 
     reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
     context.bot.send_message(chat_id=update.effective_chat.id, text=status_text, reply_markup=reply_markup)
-    
+    users_data[update.effective_chat.id]['Next_step'] = 'ToMenu'
+
 
 
 
@@ -201,6 +202,8 @@ list_models = {
                 'GetUsersCarsNumber': GetUsersCarsNumber,
                 'GetNameNumberAndPushMenu': GetNameNumberAndPushMenu,
                 'SelectMenu': SelectMenu,
+                'GetSatus': GetSatus,
+                'ToMenu': ToMenu,
              }
 print('________________Bot started__________________')
 
