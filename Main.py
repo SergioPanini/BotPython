@@ -80,7 +80,7 @@ def SelectRegOrNo(update, context):
 
 def GetNameUser(update, context):
     users_data[update.effective_chat.id]['Name'] = update.message.text
-    user_data[update.effective_chat.id]['Nex_step'] = 'GetUsersCarsNumber'
+    users_data[update.effective_chat.id]['Nex_step'] = 'GetUsersCarsNumber'
     context.bot.send_message(chat_id=update.effective_chat.id, text='ветка регистрации')
 
 
@@ -89,13 +89,13 @@ def GetUsersCarsNumber(update, context):
         Result = GetNumberOnPhote(update)
         if Result != False:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля: ' + Result)
-            user_data[update.effective_chat.id]['Nex_step'] = 'GetNameNumber'
+            users_data[update.effective_chat.id]['Nex_step'] = 'GetNameNumber'
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля не распознан, отправьте фото еще раз или введите номер.')
     
     else:
         users_data[update.effective_chat.id]['CarNumber'] = update.message.text
-        user_data[update.effective_chat.id]['Nex_step'] = 'GetNameNumber'
+        users_data[update.effective_chat.id]['Nex_step'] = 'GetNameNumber'
         
 def GetNameNumber(update, context):
     print(users_data)
