@@ -108,7 +108,7 @@ def GetNameNumber(update, context):
 
 
 def MessageGet(update, context):
-    print('Get message!')
+    print('Get message! Chat:' + update.effective_chat.id)
     list_models[users_data[update.effective_chat.id]['Next_step']](update, context)
 
 
