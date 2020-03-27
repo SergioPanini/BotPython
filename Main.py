@@ -179,6 +179,7 @@ def GetSatus(update, context):
     users_data[update.effective_chat.id]['Next_step'] = 'ToMenu'
 
 def SelectEditData(update, context):
+    print(update.message.text)
     if update.message.text == 'Изменить имя':
         EditName(update, context)
 
