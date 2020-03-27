@@ -133,7 +133,8 @@ def SelectMenu(update, context):
 
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_toeditdata)
         context.bot.send_message(chat_id=update.effective_chat.id, text=text, reply_markup=reply_markup)
-
+        users_data[update.effective_chat.id]['Next_step'] = 'SelectEditData'
+    
     else: 
         Menu(update, context)
 
@@ -178,24 +179,24 @@ def GetSatus(update, context):
     users_data[update.effective_chat.id]['Next_step'] = 'ToMenu'
 
 def SelectEditData(update, context):
-    if update.message.text == 'изменить имя':
+    if update.message.text == 'Изменить имя':
         EditName(update, context)
 
-    elif update.message.text == 'изменить телефон':
+    elif update.message.text == 'Изменить телефон':
         EditPhone(update, context)
         
-    elif update.message.text == 'изменить номер':
+    elif update.message.text == 'Изменить номер':
         EditCarNumber(update, context)
 
-    elif update.message.text == 'изменить ник': 
+    elif update.message.text == 'Изменить ник': 
         EditCarName(update, context)
 
-    elif update.message.text == 'вернутся в меню':
+    elif update.message.text == 'Вернутся в меню':
         Menu(update, context)
                 
     else:
-        custom_keyboard_toeditdata = [['изменить имя', 'изменить телефон'], ['изменить номер', 'изменить ник'], ['вернутся в меню']]
-        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
+        custom_keyboard_toeditdata = [['Изменить имя', 'Изменить телефон'], ['Изменить номер', 'Изменить ник'], ['вернутся в меню']]
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_toeditdata)
         context.bot.send_message(chat_id=update.effective_chat.id, text=NOT_SELECT_BUTTON, reply_markup=reply_markup)
     
 def EditName(update, context):
@@ -238,6 +239,7 @@ list_models = {
                 'SelectMenu': SelectMenu,
                 'GetSatus': GetSatus,
                 'ToMenu': ToMenu,
+                'SelectEditData': SelectEditData,
                 'EditName': EditName,
                 'EditPhone': EditPhone,
                 'EditCarNumber': EditCarNumber,
