@@ -212,7 +212,7 @@ def GetSatus(update, context):
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
         context.bot.send_message(chat_id=update.effective_chat.id, text='Машин на парковке нет', reply_markup=reply_markup)
         users_data[update.effective_chat.id]['Next_step'] = 'ToMenu'
-        
+
     elif res != False:
         status_data = eval(res)
         if status_data['OUT'] == False:
@@ -222,8 +222,8 @@ def GetSatus(update, context):
         status_text = '''
         Ваш автомобиль: {0}
         Номер автомобиля: {1}
-        Статус:{2}
-        Прошло времени:{3}
+        Статус: {2}
+        Прошло времени: {3}
         Итого к оплате:
         '''.format(status_data['CarName'], status_data['CarNumber'], on_park, status_data['DeltaTime'])
 
