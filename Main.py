@@ -205,18 +205,29 @@ def ToMenu(update, context):
 #This function get status parks use API
 def GetSatus(update, context):
     custom_keyboard_tomenu = [['Обновить статус', 'Вернутся в меню']]
-    status_text = '''
-    Ваш автомобиль $Ник автомобиля:
-    Номер автомобиля: $car number
-    Статус: не на парковке Parks&Me / на парковке Parks&Me
-    Прошло времени: $time
-    Итого к оплате:
-    '''
+    res = A.GetStatus(update.effective_chat.id)
+    if res != False:
 
-    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=status_text, reply_markup=reply_markup)
-    users_data[update.effective_chat.id]['Next_step'] = 'ToMenu'
+        status_data = dict(res)
+        if status_data['OUT'] == False:
+            on_park = 'на парковке Parks&Me'
+        else:
+            on_park = 'не на парковке Parks&Me'
+        status_text = '''
+        Ваш автомобиль: {0}
+        Номер автомобиля: {1}
+        Статус:{2}
+        Прошло времени:{3}
+        Итого к оплате:
+        '''.format(status_data['CarName'], status_data['CarNumber'], on_park, status_data['DeltaTime'])
 
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=status_text, reply_markup=reply_markup)
+        users_data[update.effective_chat.id]['Next_step'] = 'ToMenu'
+    else:
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Не удалось получить статус, обратитесь в тех поддержку', reply_markup=reply_markup)
+        
 def SelectEditData(update, context):
     print(update.message.text)
     if update.message.text == 'Изменить имя':
