@@ -209,7 +209,7 @@ def GetSatus(update, context):
     print(res)
     if res != False:
 
-        status_data = dict(res)
+        status_data = eval(res)
         if status_data['OUT'] == False:
             on_park = 'на парковке Parks&Me'
         else:
@@ -225,6 +225,10 @@ def GetSatus(update, context):
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
         context.bot.send_message(chat_id=update.effective_chat.id, text=status_text, reply_markup=reply_markup)
         users_data[update.effective_chat.id]['Next_step'] = 'ToMenu'
+    elif res == 'Parks is not':
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Машин на парковне нет', reply_markup=reply_markup)
+
     else:
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
         context.bot.send_message(chat_id=update.effective_chat.id, text='Не удалось получить статус, обратитесь в тех поддержку', reply_markup=reply_markup)
