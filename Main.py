@@ -207,11 +207,12 @@ def GetSatus(update, context):
     custom_keyboard_tomenu = [['Обновить статус', 'Вернутся в меню']]
     res = A.GetStatus(update.effective_chat.id)
     print(res)
-    
+
     if res == 'Parks is not':
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Машин на парковне нет', reply_markup=reply_markup)
-   
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Машин на парковке нет', reply_markup=reply_markup)
+        users_data[update.effective_chat.id]['Next_step'] = 'ToMenu'
+        
     elif res != False:
         status_data = eval(res)
         if status_data['OUT'] == False:
