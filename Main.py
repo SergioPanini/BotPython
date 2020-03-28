@@ -123,7 +123,7 @@ def GetPhoneNumber(update, context):
 def GetNameNumberAndPushMenu(update, context):
     users_data[update.effective_chat.id]['NameNumber'] = update.message.text
     context.bot.send_message(chat_id=update.effective_chat.id, text='Отлично, все данные введены.')
-    print(users_data)
+    print('GetNameAndPushMenu, ', users_data)
     #A.AddUser(update.effective_chat.id, users_data[update.effective_chat.id]['Name'], 'None', )
     Menu(update, context)
 
@@ -177,6 +177,7 @@ def Menu(update, context):
     reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_menu)
     context.bot.send_message(chat_id=update.effective_chat.id, text=menu_text, reply_markup=reply_markup)
     users_data[update.effective_chat.id]['Next_step'] = 'SelectMenu'
+    print('menu, ', users_data)
     
 
 def ToMenu(update, context):
