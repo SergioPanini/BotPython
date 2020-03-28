@@ -123,7 +123,7 @@ def GetPhoneNumber(update, context):
 def GetNameNumberAndPushMenu(update, context):
     users_data[update.effective_chat.id]['NameNumber'] = update.message.text
     context.bot.send_message(chat_id=update.effective_chat.id, text='Отлично, все данные введены.')
-    #print('GetNameAndPushMenu, ', users_data)
+    print('GetNameAndPushMenu, ', users_data)
     if A.AddUser(update.effective_chat.id, users_data[update.effective_chat.id]['Name'], 'None', users_data[update.effective_chat.id]['Phone']):
        print('User: {0} is adding'.format(update.effective_chat.id)) 
     else:
