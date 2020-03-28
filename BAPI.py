@@ -40,7 +40,7 @@ class API():
         path = '/getstatus?idtelegram={0}&SecretToken={1}'.format(idUser, self.SecretToken)
         response = req.get(self.host + path)
         
-        if response.text != 'Errors' and response.text != 'Errors in get parameters' and response.text != 'Parks is not':
+        if response.text != 'Errors' and response.text != 'Errors in get parameters':
             return response.text
         return False
     
