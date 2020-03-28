@@ -274,7 +274,8 @@ list_models = {
                 'EditPhone': EditPhone,
                 'EditCarNumber': EditCarNumber,
                 'EditCarName': EditCarName,
-                'GetMessageSupport': GetMessageSupport, 
+                'GetMessageSupport': GetMessageSupport,
+                'GetPhoneNumber': GetPhoneNumber,
              }
 print('________________Bot started__________________')
 
