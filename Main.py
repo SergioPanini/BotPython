@@ -273,7 +273,7 @@ def EditCarName(update, context):
 def MessageGet(update, context):
     print('Get message! Chat:' + str(update.effective_chat.id))
     with open('user_data.txt', 'w') as f:
-        f.write(users_data)
+        f.write(str(users_data))
     list_models[users_data[update.effective_chat.id]['Next_step']](update, context)
 
 
