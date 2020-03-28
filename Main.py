@@ -99,7 +99,7 @@ def GetUsersCarsNumber(update, context):
     if update.message.text == None:
         Result = GetNumberOnPhote(update)
         if Result != False:
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля: ' + Result + 'Как назовете этот автомобиль?')
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля: ' + Result + ' Как назовете этот автомобиль?')
             users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumberAndPushMenu'
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля не распознан, отправьте фото еще раз или введите номер.')
@@ -154,7 +154,7 @@ def SelectMenu(update, context):
 def GetMessageSupport(update, context):
     #DOTO push message support
     context.bot.send_message(chat_id=update.effective_chat.id, text='Ваше обращение зарегистрировано, с вами скоро свяжутся!')
-    users_data[update.effective_chat.id]['Next_step'] = 'SelectMenu'
+    Menu(update, context)
 
 def Menu(update, context):
     custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
