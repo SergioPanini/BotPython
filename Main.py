@@ -129,7 +129,7 @@ def SelectMenu(update, context):
 
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_toeditdata)
         context.bot.send_message(chat_id=update.effective_chat.id, text=text, reply_markup=reply_markup)
-        users_data[update.effective_chat.id]['Next_step'] = 'SelectEditData'
+        users_data[update.effective_chat.id]['Next_step'] = 'GetMessageSupport'
 
     elif update.message.text == 'Вопросы и ответы':
 
@@ -146,7 +146,7 @@ def SelectMenu(update, context):
 
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_toeditdata)
         context.bot.send_message(chat_id=update.effective_chat.id, text=text, reply_markup=reply_markup)
-        users_data[update.effective_chat.id]['Next_step'] = 'GetMessageSupport'
+        users_data[update.effective_chat.id]['Next_step'] = 'SelectEditData'
     
     else: 
         Menu(update, context)
@@ -154,6 +154,7 @@ def SelectMenu(update, context):
 def GetMessageSupport(update, context):
     #DOTO push message support
     context.bot.send_message(chat_id=update.effective_chat.id, text='Ваше обращение зарегистрировано, с вами скоро свяжутся!')
+    users_data[update.effective_chat.id]['Next_step'] = 'SelectMenu'
 
 def Menu(update, context):
     custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
