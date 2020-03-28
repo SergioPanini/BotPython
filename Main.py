@@ -206,6 +206,7 @@ def ToMenu(update, context):
 def GetSatus(update, context):
     custom_keyboard_tomenu = [['Обновить статус', 'Вернутся в меню']]
     res = A.GetStatus(update.effective_chat.id)
+    print(res)
     if res != False:
 
         status_data = dict(res)
