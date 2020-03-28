@@ -122,7 +122,7 @@ def SelectMenu(update, context):
         GetSatus(update, context)
 
     elif update.message.text == 'Оставить обращение в поддержку':
-        custom_keyboard_toeditdata = ['вернутся в меню']
+        custom_keyboard_toeditdata = [['Bернутся в меню']]
         text = '''
         Вы можете оставить нам сообщение и мы свяжемся с вами
         '''
@@ -136,7 +136,7 @@ def SelectMenu(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=TEXT_QUESTION_AND_ANSWER)
 
     elif update.message.text == 'Изменить данные':
-        custom_keyboard_toeditdata = [['изменить имя', 'изменить телефон'], ['изменить номер', 'изменить ник'], ['вернутся в меню','']]
+        custom_keyboard_toeditdata = [['Изменить имя', 'Изменить телефон'], ['Изменить номер', 'Изменить ник'], ['Вернутся в меню','']]
         text = '''
         Вы можете изменить следующие данные:
         -Ваше имя: @name
@@ -214,7 +214,7 @@ def SelectEditData(update, context):
         Menu(update, context)
                 
     else:
-        custom_keyboard_toeditdata = [['Изменить имя', 'Изменить телефон'], ['Изменить номер', 'Изменить ник'], ['вернутся в меню']]
+        custom_keyboard_toeditdata = [['Изменить имя', 'Изменить телефон'], ['Изменить номер', 'Изменить ник'], ['Вернутся в меню']]
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_toeditdata)
         context.bot.send_message(chat_id=update.effective_chat.id, text=NOT_SELECT_BUTTON, reply_markup=reply_markup)
     
