@@ -4,18 +4,20 @@ from telegram.ext import CommandHandler, MessageHandler
 from telegram.ext import Filters
 import logging
 
-import requests
+from BAPI import API
 import base64
 import json
 
+import requests
 import os
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
 
 Token = '506889620:AAEu2LhOhwYf0jcLLPnX2v3t0p38679198o'
-
-
+host = r'http://sergey223344.pythonanywhere.com'
+SecretToken = 1234
+A = API(host, SecretToken)
 
 updater = Updater(token=Token, use_context=True)
 dispatcher = updater.dispatcher
@@ -57,18 +59,21 @@ def GetNumberOnPhote(update):
 
 #start command
 def Start(update, context):
+    if A.IsUser(update.effective_chat.id) == 'True':
+        context.bot.send_message(chat_id=update.effective_chat.id, text='К сожелению ваш аккаунт уже есть в системе, обратитесь в тех поддержку.')
+    else:
+        custom_keyboard_start = [['Регистрация', 'Ввести код парковки']]
+        Start_text = '''
+        Здравствуйте! Я ваш персональный помощник в поиске и оплате парковок.
+        Для начала использования автоматизированных парковок вам требуется зарегистрировать
+        свой аккаунт или ввести код парковки.
+        '''
 
-    custom_keyboard_start = [['Регистрация', 'Ввести код парковки']]
-    Start_text = '''
-    Здравствуйте! Я ваш персональный помощник в поиске и оплате парковок.
-    Для начала использования автоматизированных парковок вам требуется зарегистрировать
-    свой аккаунт или ввести код парковки.
-    '''
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=Start_text, reply_markup=reply_markup)
+        users_data[update.effective_chat.id] = {'Next_step': 'SelectRegOrNo'}
 
-    reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
-    context.bot.send_message(chat_id=update.effective_chat.id, text=Start_text, reply_markup=reply_markup)
-    users_data[update.effective_chat.id] = {'Next_step': 'SelectRegOrNo'}
-
+     
 
 def SelectRegOrNo(update, context):
     if update.message.text == 'Регистрация':
@@ -89,8 +94,8 @@ def SelectRegOrNo(update, context):
 
 def GetNameUser(update, context):
     users_data[update.effective_chat.id]['Name'] = update.message.text
-    users_data[update.effective_chat.id]['Next_step'] = 'GetUsersCarsNumber'
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Введите пожалуйста номер вашегоавто в формате: O529TH197 или отправьте фото вашего номера.')
+    users_data[update.effective_chat.id]['Next_step'] = 'GetPhoneNumber'
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Введите пожалуйста номер вашего телефона.')
 
 
 def GetUsersCarsNumber(update, context):
@@ -109,11 +114,17 @@ def GetUsersCarsNumber(update, context):
         users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumberAndPushMenu'
         context.bot.send_message(chat_id=update.effective_chat.id, text='Как назовете этот автомобиль?')
     
-        
-def GetNameNumberAndPushMenu(update, context):
-    users_data[update.effective_chat.id]['Name'] = update.message.text
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Отлично, все данные введены.')
 
+def GetPhoneNumber(update, context):
+    users_data[update.effective_chat.id]['Phone'] = update.message.text
+    users_data[update.effective_chat.id]['Next_step'] = 'GetUsersCarsNumber'
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Какой номер у вашего автомобиля? Вы можете отправить мне фотографию номера или просто номер')
+
+def GetNameNumberAndPushMenu(update, context):
+    users_data[update.effective_chat.id]['NameNumber'] = update.message.text
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Отлично, все данные введены.')
+    print(users_data)
+    #A.AddUser(update.effective_chat.id, users_data[update.effective_chat.id]['Name'], 'None', )
     Menu(update, context)
 
 
