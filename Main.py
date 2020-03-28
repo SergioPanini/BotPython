@@ -25,6 +25,13 @@ users_data = {}
 #Messege if button no select
 NOT_SELECT_BUTTON = 'Выберете один из пунктов'
 
+TEXT_QUESTION_AND_ANSWER = '''
+TEXT_QUESTION_AND_ANSWER
+TEXT_QUESTION_AND_ANSWER
+TEXT_QUESTION_AND_ANSWER
+
+'''
+
  #This functiions get photo and output car's number or false 
 def GetNumberOnPhote(update):
     
@@ -115,12 +122,18 @@ def SelectMenu(update, context):
         GetSatus(update, context)
 
     elif update.message.text == 'Оставить обращение в поддержку':
+        custom_keyboard_toeditdata = ['вернутся в меню']
+        text = '''
+        Вы можете оставить нам сообщение и мы свяжемся с вами
+        '''
 
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Эту ветку нужно еще допилить')
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_toeditdata)
+        context.bot.send_message(chat_id=update.effective_chat.id, text=text, reply_markup=reply_markup)
+        users_data[update.effective_chat.id]['Next_step'] = 'SelectEditData'
 
     elif update.message.text == 'Вопросы и ответы':
 
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Эту ветку нужно еще допилить')
+        context.bot.send_message(chat_id=update.effective_chat.id, text=TEXT_QUESTION_AND_ANSWER)
 
     elif update.message.text == 'Изменить данные':
         custom_keyboard_toeditdata = [['изменить имя', 'изменить телефон'], ['изменить номер', 'изменить ник'], ['вернутся в меню','']]
@@ -133,10 +146,14 @@ def SelectMenu(update, context):
 
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_toeditdata)
         context.bot.send_message(chat_id=update.effective_chat.id, text=text, reply_markup=reply_markup)
-        users_data[update.effective_chat.id]['Next_step'] = 'SelectEditData'
+        users_data[update.effective_chat.id]['Next_step'] = 'GetMessageSupport'
     
     else: 
         Menu(update, context)
+
+def GetMessageSupport(update, context):
+    #DOTO push message support
+    context.bot.send_message(chat_id=update.effective_chat.id, text='Ваше обращение зарегистрировано, с вами скоро свяжутся!')
 
 def Menu(update, context):
     custom_keyboard_menu = [['Текущий статус парковки', 'Оставить обращение в поддержку'],['Вопросы и ответы', 'Изменить данные']]
@@ -245,6 +262,7 @@ list_models = {
                 'EditPhone': EditPhone,
                 'EditCarNumber': EditCarNumber,
                 'EditCarName': EditCarName,
+                'GetMessageSupport': GetMessageSupport, 
              }
 print('________________Bot started__________________')
 
