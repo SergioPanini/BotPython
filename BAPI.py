@@ -46,6 +46,6 @@ class API():
     
 
 
-a = API('http://sergey223344.pythonanywhere.com', '1234')
+#a = API('http://sergey223344.pythonanywhere.com', '1234')
 
-print(a.GetStatus('777'))
+#print(a.GetStatus('777'))
