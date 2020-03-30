@@ -74,7 +74,7 @@ def Start(update, context):
 свой аккаунт или ввести код парковки.
         '''
 
-        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start, one_time_keyboard=True)
         context.bot.send_message(chat_id=update.effective_chat.id, text=Start_text, reply_markup=reply_markup)
         users_data[update.effective_chat.id] = {'Next_step': 'SelectRegOrNo'}
 
@@ -83,10 +83,10 @@ def Start(update, context):
 def SelectRegOrNo(update, context):
     if update.message.text == 'Регистрация':
 
-        custom_keyboard = [['one']]
-        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
+        #custom_keyboard = [['one']]
+        #reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
         users_data[update.effective_chat.id]['Next_step'] = 'GetNameUser'
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Введите пожалуйста имя', reply_markup=reply_markup)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Введите пожалуйста ваше имя')
 
     elif update.message.text == 'Ввести код парковки':
 
