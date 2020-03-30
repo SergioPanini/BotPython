@@ -232,7 +232,7 @@ def GetSatus(update, context):
         Статус: {2}
         Прошло времени: {3}
         Итого к оплате:
-        '''.format(status_data['CarName'], status_data['CarNumber'], on_park, status_data['DeltaTime'].split('.'[0]))
+        '''.format(status_data['CarName'], status_data['CarNumber'], on_park, status_data['DeltaTime'].split('.')[0]))
 
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
         context.bot.send_message(chat_id=update.effective_chat.id, text=status_text, reply_markup=reply_markup)
