@@ -35,8 +35,9 @@ TEXT_QUESTION_AND_ANSWER
 '''
 
 with open('user_data.txt', 'r') as f:
-        user_data = eval(f.read())
+        users_data = eval(f.read())
 
+print('load data: ', users_data)
 
 
  #This functiions get photo and output car's number or false 
