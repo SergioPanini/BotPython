@@ -90,7 +90,7 @@ def SelectRegOrNo(update, context):
 
     elif update.message.text == 'Ввести код парковки':
         custom_keyboard_start = [['Регистрация', 'Ввести код парковки']]
-        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start, one_time_keyboard=True)
         context.bot.send_message(chat_id=update.effective_chat.id, text='Эту ветку нужно еще допилить', reply_markup=reply_markup)
 
     else: 
