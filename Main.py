@@ -35,7 +35,7 @@ TEXT_QUESTION_AND_ANSWER
 '''
 
 with open('user_data.txt', 'r') as f:
-        user_data = evel(f.read())
+        user_data = eval(f.read())
 
 
 
