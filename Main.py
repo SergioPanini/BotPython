@@ -89,12 +89,13 @@ def SelectRegOrNo(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text='Введите пожалуйста ваше имя')
 
     elif update.message.text == 'Ввести код парковки':
-
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Эту ветку нужно еще допилить')
+        custom_keyboard_start = [['Регистрация', 'Ввести код парковки']]
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Эту ветку нужно еще допилить', reply_markup=reply_markup)
 
     else: 
         custom_keyboard_start = [['Регистрация', 'Ввести код парковки']]
-        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start, one_time_keyboard=True)
         context.bot.send_message(chat_id=update.effective_chat.id, text='Выберити пожалуйста один из вариантов', reply_markup=reply_markup)
 
 
