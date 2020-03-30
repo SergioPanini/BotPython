@@ -69,7 +69,7 @@ def Start(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text='К сожелению ваш аккаунт уже есть в системе, обратитесь в тех поддержку.')
     else:
         custom_keyboard_start = [['Регистрация', 'Ввести код парковки']]
-        Start_text = '''Здравствуйте! Я ваш персональный помощник в поиске и оплате парковок.\
+        Start_text = '''Здравствуйте! Я ваш персональный помощник в поиске и оплате парковок. \
 Для начала использования автоматизированных парковок вам требуется зарегистрировать \
 свой аккаунт или ввести код парковки.
         '''
@@ -86,7 +86,7 @@ def SelectRegOrNo(update, context):
         custom_keyboard = [[]]
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard)
         users_data[update.effective_chat.id]['Next_step'] = 'GetNameUser'
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Введите пожалуйста имя')
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Введите пожалуйста имя', reply_markup=reply_markup)
 
     elif update.message.text == 'Ввести код парковки':
 
