@@ -34,6 +34,11 @@ TEXT_QUESTION_AND_ANSWER
 
 '''
 
+with open('user_data.txt', 'r') as f:
+        user_data = evel(f.read())
+
+
+
  #This functiions get photo and output car's number or false 
 def GetNumberOnPhote(update):
     
@@ -63,10 +68,9 @@ def Start(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text='К сожелению ваш аккаунт уже есть в системе, обратитесь в тех поддержку.')
     else:
         custom_keyboard_start = [['Регистрация', 'Ввести код парковки']]
-        Start_text = '''
-        Здравствуйте! Я ваш персональный помощник в поиске и оплате парковок.
-        Для начала использования автоматизированных парковок вам требуется зарегистрировать
-        свой аккаунт или ввести код парковки.
+        Start_text = '''Здравствуйте! Я ваш персональный помощник в поиске и оплате парковок. \
+            Для начала использования автоматизированных парковок вам требуется зарегистрировать \
+                свой аккаунт или ввести код парковки.
         '''
 
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start)
