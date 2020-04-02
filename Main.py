@@ -326,8 +326,15 @@ def EditCarNumber(update, context):
         Menu(update, context)
 
 def EditCarName(update, context):
-    print('edacarname')
+    if A.EditCarName(update.effective_chat.id, users_data[update.effective_chat.id]['NameNumber'], update.message.text):
+        users_data[update.effective_chat.id]['NameNumber'] = update.message.text
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Данные обновлены')
+        Menu(update, context)
 
+    else:
+
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Данные не обновлены, обратитесь, пожалуйста, в тех. поддержку')
+        Menu(update, context)
 
 
 def MessageGet(update, context):
