@@ -185,13 +185,15 @@ def SelectMenu(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=TEXT_QUESTION_AND_ANSWER)
 
     elif update.message.text == 'Изменить данные':
-        custom_keyboard_toeditdata = [['Изменить имя', 'Изменить телефон'], ['Изменить номер', 'Изменить ник'], ['Вернутся в меню','']]
+        custom_keyboard_toeditdata = [['Изменить ваше имя', 'Изменить телефон'], ['Изменить номер', 'Изменить имя автомобиля'], ['Вернутся в меню','']]
         text = '''
         Вы можете изменить следующие данные:
-        -Ваше имя: @name
-        -Ваш номер телефона: @phone
-        -Номер вашего автомобиля: @carnumber
-        '''
+        -Ваше имя: {0}
+        -Ваш номер телефона: {1}
+        -Номер вашего автомобиля: {2}
+        -Имя вашего автомобиля: {3}
+        '''.format(users_data[update.effective_chat.id]['Name'], users_data[update.effective_chat.id]['Phone'], \
+            users_data[update.effective_chat.id]['CarNumber'], users_data[update.effective_chat.id]['NameNumber'])
 
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_toeditdata)
         context.bot.send_message(chat_id=update.effective_chat.id, text=text, reply_markup=reply_markup)
@@ -199,6 +201,10 @@ def SelectMenu(update, context):
     
     else: 
         Menu(update, context)
+
+def SelectEdit(update, context):
+    pass
+
 
 def GetMessageSupport(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Ваше обращение зарегистрировано, с вами скоро свяжутся!')

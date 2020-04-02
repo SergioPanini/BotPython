@@ -44,8 +44,40 @@ class API():
             return response.text
         return False
     
+    def EditName(self, idUser, NewName):
+        path = '/editname?idtelegram={0}&SecretToken={1}&newname={2}'.format(idUser, self.SecretToken, NewName)
+        response = req.get(self.host + path)
 
+        if response.text != 'Errors' and response.text != 'Errors in get parameters':
+            return True
+        return False
+
+    def EditPhone(self, idUser, NewPhone):
+        
+        path = '/editphone?idtelegram={0}&SecretToken={1}&newphone={2}'.format(idUser, self.SecretToken, NewPhone)
+        response = req.get(self.host + path)
+
+        if response.text != 'Errors' and response.text != 'Errors in get parameters':
+            return True
+        return False
+    
+    def EditCarNumber(self, idUser, Number, NewNumber):
+        path = '/editcarnumber?idtelegram={0}&SecretToken={1}&newnumber={2}&number={3}'.format(idUser, self.SecretToken, NewNumber, Number)
+        response = req.get(self.host + path)
+
+        if response.text != 'Errors' and response.text != 'Errors in get parameters':
+            return True
+        return False
+    
+    def EditCarName(self, idUser, CarNumber, NewName):
+        path = '/editcarname?idtelegram={0}&SecretToken={1}&carnumber={2}&newname={3}'.format(idUser, self.SecretToken, CarNumber, NewName)
+        response = req.get(self.host + path)
+
+        if response.text != 'Errors' and response.text != 'Errors in get parameters':
+            return True
+        return False
+    
 
 #a = API('http://sergey223344.pythonanywhere.com', '1234')
 
-#print(a.GetStatus('777'))
+#print(a.EditCarName('777', 'Ford', 'chevvrole'))
