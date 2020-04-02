@@ -301,13 +301,29 @@ def EditName(update, context):
     else:
 
         context.bot.send_message(chat_id=update.effective_chat.id, text='Данные не обновлены, обратитесь, пожалуйста, в тех. поддержку')
-        Menu()
+        Menu(update, context)
 
 def EditPhone(update, context):
-    print('edph')
+    if A.EditPhone(update.effective_chat.id, update.message.text):
+        users_data[update.effective_chat.id]['Phone'] = update.message.text
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Данные обновлены')
+        Menu(update, context)
+
+    else:
+
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Данные не обновлены, обратитесь, пожалуйста, в тех. поддержку')
+        Menu(update, context)
 
 def EditCarNumber(update, context):
-    print('edcarnum')
+    if A.EditCarNumber(update.effective_chat.id, users_data[update.effective_chat.id]['CarNumber'], update.message.text):
+        users_data[update.effective_chat.id]['CarNumber'] = update.message.text
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Данные обновлены')
+        Menu(update, context)
+
+    else:
+
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Данные не обновлены, обратитесь, пожалуйста, в тех. поддержку')
+        Menu(update, context)
 
 def EditCarName(update, context):
     print('edacarname')
