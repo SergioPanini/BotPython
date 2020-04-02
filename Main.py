@@ -5,6 +5,8 @@ from telegram.ext import Filters
 import logging
 
 from BAPI import API
+from Data import Token, SecretToken,  host
+
 import base64
 import json
 
@@ -14,9 +16,6 @@ import os
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
 
-Token = '506889620:AAEu2LhOhwYf0jcLLPnX2v3t0p38679198o'
-host = r'http://sergey223344.pythonanywhere.com'
-SecretToken = 1234
 A = API(host, SecretToken)
 
 updater = Updater(token=Token, use_context=True)
