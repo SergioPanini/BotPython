@@ -288,7 +288,7 @@ def SelectEditData(update, context):
         Menu(update, context)
                 
     else:
-        custom_keyboard_toeditdata = [['Изменить имя', 'Изменить телефон'], ['Изменить номер', 'Изменить ник'], ['Вернутся в меню']]
+        custom_keyboard_toeditdata = [['Изменить ваше имя', 'Изменить телефон'], ['Изменить номер', 'Изменить номер автомобиля'], ['Вернутся в меню']]
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_toeditdata)
         context.bot.send_message(chat_id=update.effective_chat.id, text=NOT_SELECT_BUTTON, reply_markup=reply_markup)
     
