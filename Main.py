@@ -105,11 +105,10 @@ def GetNameUser(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Введите пожалуйста номер вашего телефона.')
 
 
-def YesOrNoYouCarNumber(update, context, Result):
+def YesOrNoYouCarNumber(update, context):
     if update.message.text == 'Да':
         
         context.bot.send_message(chat_id=update.effective_chat.id, text='Как назовете этот автомобиль?')
-        users_data[update.effective_chat.id]['CarNumber'] = Result
         users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumberAndPushMenu'
 
     elif update.message.text == 'Нет':
@@ -133,7 +132,9 @@ def GetUsersCarsNumber(update, context):
             custom_keyboard_start = [['Да', 'Нет']]
             reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start, one_time_keyboard=True)
             context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля: ' + Result + ', все верно?', reply_markup=reply_markup)
+            users_data[update.effective_chat.id]['CarNumber'] = Result
             users_data[update.effective_chat.id]['Next_step'] = 'YesOrNoYouCarNumber'
+        
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля не распознан, отправьте фото еще раз или введите номер.')
             
