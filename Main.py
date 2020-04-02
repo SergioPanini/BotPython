@@ -105,18 +105,38 @@ def GetNameUser(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Введите пожалуйста номер вашего телефона.')
 
 
+def YesOrNoYouCarNumber(update, context, Result):
+    if update.message.text == 'Да':
+        
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Как назовете этот автомобиль?')
+        users_data[update.effective_chat.id]['CarNumber'] = Result
+        users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumberAndPushMenu'
+
+    elif update.message.text == 'Нет':
+
+        users_data[update.effective_chat.id]['Next_step'] = 'GetUsersCarsNumber'
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Какой номер у вашего автомобиля? Вы можете отправить мне фотографию номера или просто номер')
+
+    else:
+        custom_keyboard_start = [['Да', 'Нет']]
+        reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start, one_time_keyboard=True)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Выберете, пожалуйста, один из вариантов ответа', reply_markup=reply_markup)
+
+
 def GetUsersCarsNumber(update, context):
     print('GetUsersCarsNumber is calling')
     print(str(update.message.text))
     if update.message.text == None:
         Result = GetNumberOnPhote(update)
         if Result != False:
-            context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля: ' + Result + ' Как назовете этот автомобиль?')
-            users_data[update.effective_chat.id]['CarNumber'] = Result
-            users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumberAndPushMenu'
+            
+            custom_keyboard_start = [['Да', 'Нет']]
+            reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_start, one_time_keyboard=True)
+            context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля: ' + Result + ', все верно?', reply_markup=reply_markup)
+            users_data[update.effective_chat.id]['Next_step'] = 'YesOrNoYouCarNumber'
         else:
             context.bot.send_message(chat_id=update.effective_chat.id, text='Номер вашего автомобиля не распознан, отправьте фото еще раз или введите номер.')
-    
+            
     else:
         users_data[update.effective_chat.id]['CarNumber'] = update.message.text
         users_data[update.effective_chat.id]['Next_step'] = 'GetNameNumberAndPushMenu'
@@ -311,6 +331,7 @@ list_models = {
                 'EditCarName': EditCarName,
                 'GetMessageSupport': GetMessageSupport,
                 'GetPhoneNumber': GetPhoneNumber,
+                'YesOrNoYouCarNumber': YesOrNoYouCarNumber,
              }
 print('________________Bot started__________________')
 
