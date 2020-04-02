@@ -293,7 +293,7 @@ def SelectEditData(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=NOT_SELECT_BUTTON, reply_markup=reply_markup)
     
 def EditName(update, context):
-    if API.EditName(update.effective_chat.id, update.message.text):
+    if A.EditName(update.effective_chat.id, update.message.text):
         context.bot.send_message(cht_id=update.effective_chat.id, text='Данные обновлены')
         Menu(update, context)
 
@@ -301,7 +301,7 @@ def EditName(update, context):
 
         context.bot.send_message(chat_id=update.effective_chat.id, text='Данные не обновлены, обратитесь, пожалуйста, в тех. поддержку')
         Menu()
-        
+
 def EditPhone(update, context):
     print('edph')
 
