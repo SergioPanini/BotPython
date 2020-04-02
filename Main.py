@@ -326,7 +326,7 @@ def EditCarNumber(update, context):
         Menu(update, context)
 
 def EditCarName(update, context):
-    if A.EditCarName(update.effective_chat.id, users_data[update.effective_chat.id]['NameNumber'], update.message.text):
+    if A.EditCarName(update.effective_chat.id, users_data[update.effective_chat.id]['CarNumber'], update.message.text):
         users_data[update.effective_chat.id]['NameNumber'] = update.message.text
         context.bot.send_message(chat_id=update.effective_chat.id, text='Данные обновлены')
         Menu(update, context)
