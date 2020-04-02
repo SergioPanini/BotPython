@@ -202,8 +202,7 @@ def SelectMenu(update, context):
     else: 
         Menu(update, context)
 
-def SelectEdit(update, context):
-    pass
+   
 
 
 def GetMessageSupport(update, context):
@@ -265,21 +264,25 @@ def GetSatus(update, context):
         users_data[update.effective_chat.id]['Next_step'] = 'ToMenu'
     else:
         reply_markup = telegram.ReplyKeyboardMarkup(custom_keyboard_tomenu)
-        context.bot.send_message(chat_id=update.effective_chat.id, text='Не удалось получить статус, обратитесь в тех поддержку', reply_markup=reply_markup)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Не удалось получить статус, обратитесь в тех. поддержку', reply_markup=reply_markup)
         
 def SelectEditData(update, context):
     print(update.message.text)
-    if update.message.text == 'Изменить имя':
-        EditName(update, context)
+    if update.message.text == 'Изменить ваше имя':
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Введите новое имя ')
+        users_data[update.effective_chat.id]['Next_step'] = 'EditName'
 
     elif update.message.text == 'Изменить телефон':
-        EditPhone(update, context)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Введите новый телефон ')
+        users_data[update.effective_chat.id]['Next_step'] = 'EditPhone'
         
     elif update.message.text == 'Изменить номер':
-        EditCarNumber(update, context)
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Введите новый номер ')
+        users_data[update.effective_chat.id]['Next_step'] = 'EditCarNumber'
 
-    elif update.message.text == 'Изменить ник': 
-        EditCarName(update, context)
+    elif update.message.text == 'Изменить имя автомобиля': 
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Введите новое имя автомобиля ')
+        users_data[update.effective_chat.id]['Next_step'] = 'EditCarName'
 
     elif update.message.text == 'Вернутся в меню':
         Menu(update, context)
@@ -290,8 +293,15 @@ def SelectEditData(update, context):
         context.bot.send_message(chat_id=update.effective_chat.id, text=NOT_SELECT_BUTTON, reply_markup=reply_markup)
     
 def EditName(update, context):
-    print('edname')
+    if API.EditName(update.effective_chat.id, update.message.text):
+        context.bot.send_message(cht_id=update.effective_chat.id, text='Данные обновлены')
+        Menu(update, context)
 
+    else:
+
+        context.bot.send_message(chat_id=update.effective_chat.id, text='Данные не обновлены, обратитесь, пожалуйста, в тех. поддержку')
+        Menu()
+        
 def EditPhone(update, context):
     print('edph')
 
@@ -332,10 +342,12 @@ list_models = {
                 'GetSatus': GetSatus,
                 'ToMenu': ToMenu,
                 'SelectEditData': SelectEditData,
+
                 'EditName': EditName,
                 'EditPhone': EditPhone,
                 'EditCarNumber': EditCarNumber,
                 'EditCarName': EditCarName,
+
                 'GetMessageSupport': GetMessageSupport,
                 'GetPhoneNumber': GetPhoneNumber,
                 'YesOrNoYouCarNumber': YesOrNoYouCarNumber,
