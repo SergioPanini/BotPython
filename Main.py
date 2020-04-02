@@ -294,6 +294,7 @@ def SelectEditData(update, context):
     
 def EditName(update, context):
     if A.EditName(update.effective_chat.id, update.message.text):
+        users_data[update.effective_chat.id]['Name'] = update.message.text
         context.bot.send_message(chat_id=update.effective_chat.id, text='Данные обновлены')
         Menu(update, context)
 
